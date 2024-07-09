@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
+#include<string.h>
 
 //int main()
 //{
@@ -135,17 +136,31 @@
 //	return 0;
 //}
 
+//int main()
+//{
+//	double sum = 0;
+//	for (int i = 1; i <= 100; i++)
+//	{
+//		double num = i;
+//		if (i % 2 != 0)
+//			sum += 1 / num;
+//		else
+//			sum -= 1 / num;
+//	}
+//	printf("%lf", sum);
+//	return 0;
+//}
+
 int main()
 {
-	double sum = 0;
-	for (int i = 1; i <= 100; i++)
+	int ch = 0;
+	while ((ch = getchar()) != EOF)
 	{
-		double num = i;
-		if (i % 2 != 0)
-			sum += 1 / num;
-		else
-			sum -= 1 / num;
+		if (ch < '0' || ch > '9')
+		{
+			continue;
+		}
+		putchar(ch);
 	}
-	printf("%lf", sum);
 	return 0;
 }
