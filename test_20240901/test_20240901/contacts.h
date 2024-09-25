@@ -13,14 +13,14 @@
 
 enum menu
 {
-	ex = 0,
-	add,
-	delet,
-	find,
-	change,
-	show,
-	clear,
-	sort,
+	EXIT,
+	ADD,
+	DELET,
+	FIND,
+	CHANGE,
+	SHOW,
+	CLEAR,
+	SORT,
 };
 
 typedef struct student
@@ -46,3 +46,5 @@ void Change(Cont* contact);
 void Delet(Cont* contact);
 void Clear(Cont* contact);
 int compare(void* a, void* b);
+void Save(Cont* contact);
+void Load(Cont* contact);

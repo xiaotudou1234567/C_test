@@ -1,8 +1,10 @@
 #include "contacts.h"
 
+
 void Add(Cont* contact)
 {
 	assert(contact);
+
 	if (contact->capability == 0 || contact->capability == contact->num)
 	{
 		Stu* arr = (Stu*)realloc(contact->person, (contact->capability += EXPAND) * sizeof(Stu));
@@ -122,4 +124,53 @@ void Clear(Cont* contact)
 int compare(void* a, void* b)
 {
 	return strcmp(((Stu*)a)->name, ((Stu*)b)->name);
+}
+
+void Save(Cont* contact)
+{
+	FILE *pf = fopen("data.txt","wb");
+	if (pf == NULL)
+	{
+		perror("Save_contact");
+	}
+	for (int i = 0; i < contact->num; i++)
+	{
+		fwrite(contact->person+i,sizeof(Stu),1,pf);
+	}
+	fclose(pf);
+	pf = NULL;
+}
+
+void Load(Cont* contact)
+{
+	FILE* pf = fopen("data.txt", "rb");
+	if (pf == NULL)
+	{
+		perror("Save_contact");
+	}
+	Stu temp = { 0 };
+	while (fread(&temp, sizeof(Stu), 1, pf))
+	{
+		if (contact->capability == 0 || contact->capability == contact->num)
+		{
+			Stu* arr = (Stu*)realloc(contact->person, (contact->capability += EXPAND) * sizeof(Stu));
+			if (arr != NULL)
+			{
+				contact->person = arr;
+				contact->capability += EXPAND;
+				printf("增容成功\n");
+			}
+			else
+			{
+				perror("ADD");
+				printf("增容失败\n");
+				return;
+			}
+		}
+		memcpy(contact->person + contact->num, &temp, sizeof(Stu));
+		//contact->person[contact->num] = temp;
+		contact->num += 1;
+	}
+	fclose(pf);
+	pf = NULL;
 }

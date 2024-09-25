@@ -13,6 +13,7 @@ int main()
 {
 	int input = 0;
 	Cont contact = {NULL,0,0};
+	Load(&contact);
 	
 	do
 	{
@@ -22,29 +23,31 @@ int main()
 
 		switch (input)
 		{
-		case add:
+		case ADD:
 			Add(&contact);
 			break;
-		case delet:
+		case DELET:
 			Delet(&contact);
 			break;
-		case find:
+		case FIND:
 			Find(&contact);
 			break;
-		case change:
+		case CHANGE:
 			Change(&contact);
 			break;
-		case show:
+		case SHOW:
 			Show(&contact);
 			break;
-		case clear:
+		case CLEAR:
 			Clear(&contact);
 			break;
-		case sort:
+		case SORT:
 			qsort(contact.person, contact.num, sizeof(Stu), compare);
 			Show(&contact);
 			break;
-		case ex:
+		case EXIT:
+			Save(&contact);
+			Clear(&contact);
 			printf("ÍË³ö³É¹¦£¡");
 			break;
 		}
